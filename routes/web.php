@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'PostController@homepage')->name('homepage');
+// Route::get('/', 'PostController@homepage')->name('homepage');
+Route::get('/{any}', 'PostController@homepage')->where('any', '.*')->name('homepage');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/posts', 'PostController');
