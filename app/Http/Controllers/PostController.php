@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function homepage()
+    {
+        return view('homepage');
+    }
+
     /**
      * Display a listing of the resource.
      *
