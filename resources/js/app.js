@@ -9,12 +9,12 @@ Vue.use(VueRouter)
 
 import Index from './components/Index.vue';
 import Create from './components/Create.vue';
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import Read from './components/Read.vue';
 
 const routes = [
     { path: '/', component: Index },
-    { path: '/create', component: Create }
+    { path: '/create', component: Create },
+    { path: '/read/:id', component: Read, name: 'read' }
 ]
 
 const router = new VueRouter({
