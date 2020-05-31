@@ -2030,6 +2030,19 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         _this.errors.push(e);
       });
+    },
+    submitPostDelete: function submitPostDelete(id, index) {
+      var _this2 = this;
+
+      if (confirm("Click 'OK' to delete.")) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/posts/' + id).then(function (response) {
+          console.log(response); // JSON responses are automatically parsed.
+
+          _this2.posts.splice(index, 1);
+        })["catch"](function (e) {
+          _this2.errors.push(e);
+        });
+      }
     }
   }
 });
@@ -37841,46 +37854,73 @@ var render = function() {
         [
           _vm._m(0),
           _vm._v(" "),
-          _vm._l(_vm.posts, function(post) {
-            return _c("tbody", { key: post.id }, [
-              _c("tr", [
-                _c("td", [_vm._v(_vm._s(post.title))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(post.description))]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
+          _vm._l(_vm.posts, function(post, index) {
+            return _c(
+              "tbody",
+              { key: post.id, attrs: { item: post, index: index } },
+              [
+                _c("tr", [
+                  _c("td", [_vm._v(_vm._s(post.title))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(post.description))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-info",
+                          attrs: {
+                            to: { name: "read", params: { id: post.id } }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-eye" }), _vm._v(" View")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            to: { name: "edit", params: { id: post.id } }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-edit" }),
+                          _vm._v(" Edit")
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", [
                     _c(
-                      "router-link",
+                      "button",
                       {
-                        staticClass: "btn btn-info",
-                        attrs: { to: { name: "read", params: { id: post.id } } }
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.submitPostDelete(post.id, index)
+                          }
+                        }
                       },
-                      [_c("i", { staticClass: "fa fa-eye" }), _vm._v(" View")]
+                      [
+                        _c("i", { staticClass: "fa fa-trash" }),
+                        _vm._v(" Delete")
+                      ]
                     )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { to: { name: "edit", params: { id: post.id } } }
-                      },
-                      [_c("i", { staticClass: "fa fa-edit" }), _vm._v(" Edit")]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _vm._m(1, true)
-              ])
-            ])
+                  ])
+                ])
+              ]
+            )
           })
         ],
         2
@@ -37904,17 +37944,6 @@ var staticRenderFns = [
         _c("th", { attrs: { width: "120px" } }),
         _vm._v(" "),
         _c("th", { attrs: { width: "120px" } })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [
-        _c("i", { staticClass: "fa fa-trash" }),
-        _vm._v(" Delete")
       ])
     ])
   }
