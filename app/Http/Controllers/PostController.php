@@ -64,7 +64,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $posts = Post::findOrFail($id);
+        return response()->json($posts);
     }
 
     /**
@@ -76,7 +77,10 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $posts = Post::findOrFail($id);
+        $posts->update($request->all());
+
+        return $posts;
     }
 
     /**
